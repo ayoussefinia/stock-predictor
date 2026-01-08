@@ -10,7 +10,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = {"http://localhost:3000"})
+@CrossOrigin(origins = {"http://localhost:3000", "https://stock-predictor-1-rrvs.onrender.com"})
 public class StocksController {
 
   private final StockService stockService;
