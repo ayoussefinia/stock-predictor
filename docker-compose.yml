@@ -1,0 +1,37 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: stocks
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/stocks
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      # Optional: Alpha Vantage key for real data fetch
+      ALPHAVANTAGE_API_KEY: ${ALPHAVANTAGE_API_KEY:-}
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend
+    environment:
+      # Next will read this at runtime in our Dockerfile command
+      NEXT_PUBLIC_API_BASE: http://localhost:8080
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:

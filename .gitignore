@@ -1,0 +1,25 @@
+# env / secrets
+.env
+
+# node
+node_modules/
+.next/
+
+# java
+target/
+*.log
+
+# docker
+*.pid
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# WSL / system
+**/.bash*
+**/.profile
+**/.ssh
+**/.npm
+**/.cache
