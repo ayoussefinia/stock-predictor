@@ -53,14 +53,14 @@ export default function HomePage() {
 
     try {
       // Optional: refresh pulls from AlphaVantage and inserts into DB
-      const refreshRes = await fetch(`http://localhost:8080/api/refresh/${t}`, {
+      const refreshRes = await fetch(`https://stock-predictor-q6o7.onrender.com/api/refresh/${t}`, {
         method: "POST",
       });
       const refreshJson = (await refreshRes.json()) as RefreshResult;
       setRefresh(refreshJson);
 
       // Then load prices from DB
-      const pricesRes = await fetch(`http://localhost:8080/api/prices/${t}`);
+      const pricesRes = await fetch(`https://stock-predictor-q6o7.onrender.com/api/prices/${t}`);
       const pricesJson = (await pricesRes.json()) as PriceRow[];
       setPrices(pricesJson);
     } catch (e: any) {
@@ -79,7 +79,7 @@ export default function HomePage() {
     setLoadingPredict(true);
 
     try {
-      const predRes = await fetch(`http://localhost:8080/api/predict/${t}`);
+      const predRes = await fetch(`https://stock-predictor-q6o7.onrender.com/api/predict/${t}`);
       const predJson = (await predRes.json()) as PredictionResult;
       setPrediction(predJson);
     } catch (e: any) {
